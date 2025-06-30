@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/sitemaps_xsl.xsl"?><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"><url>
+<loc>/</loc>
+</url>
+<url>
+<loc>/post-2/</loc>
+<lastmod>2024-04-16T18:11:10+09:00</lastmod>
+<image:image>
+<image:loc><![CDATA[/wp-content/uploads/2024/04/icon-512-transparent.png]]></image:loc>
+</image:image></url>
+<url>
+<loc>/post-3/</loc>
+<lastmod>2024-04-16T18:11:10+09:00</lastmod>
+<image:image>
+<image:loc><![CDATA[/wp-content/uploads/2024/04/guide_5-1.png]]></image:loc>
+</image:image></url>
+<url>
+<loc>/post-1/</loc>
+<lastmod>2024-04-16T18:11:10+09:00</lastmod>
+<image:image>
+<image:loc><![CDATA[/wp-content/uploads/2024/04/guide_0-1.png]]></image:loc>
+</image:image></url></urlset>
