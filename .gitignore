@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 에디터/IDE
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# Node.js/파이썬 서버 임시
+node_modules/
+.env
+*.log
+
+# 워드프레스 플러그인/테마 개발 시 임시
+wp-content/plugins/*/node_modules/
+wp-content/themes/*/node_modules/
+wp-content/plugins/*/.env
+wp-content/themes/*/.env
+
+# 워드프레스 업로드/백업 파일(정적 변환 후 필요 없을 경우)
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-*/
+
+# 기타 임시/백업 파일
+*.tmp
+*.bak
+*~
+
+# Cursor 규칙 디렉토리(필요시 주석 해제)
+# .cursor/ 
