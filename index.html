@@ -116,9 +116,133 @@ flexibility(document.documentElement);
 <link rel="icon" href="/wp-content/uploads/2024/04/cropped-Icon-512-192x192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="/wp-content/uploads/2024/04/cropped-Icon-512-180x180.png">
 <meta name="msapplication-TileImage" content="/wp-content/uploads/2024/04/cropped-Icon-512-270x270.png">
+
+<!-- XML 기반 다국어 시스템 -->
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="home wp-singular page-template-default page page-id-1373 wp-custom-logo wp-theme-astra translatepress-en_US ast-desktop ast-page-builder-template ast-no-sidebar astra-4.11.3 ast-single-post ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-theme-transparent-header ast-hfb-header">
+
+<!-- body 끝에 추가: XML 파싱 및 텍스트 치환 JS -->
+<script>
+let lang = localStorage.getItem('lang') || 'en';
+
+// 페이지 로드 시 언어 선택기 상태 설정
+document.addEventListener('DOMContentLoaded', function() {
+  updateLanguageSwitcher();
+  loadTexts();
+});
+
+function updateLanguageSwitcher() {
+  // 현재 언어 플래그와 코드 업데이트
+  const currentFlag = document.getElementById('current-lang-flag');
+  const currentCode = document.getElementById('current-lang-code');
+  
+  if (lang === 'ko') {
+    currentFlag.src = '/wp-content/plugins/translatepress-multilingual/assets/images/flags/ko_KR.png';
+    currentFlag.alt = 'ko_KR';
+    currentFlag.title = '한국어';
+    currentCode.textContent = 'KO';
+  } else {
+    currentFlag.src = '/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png';
+    currentFlag.alt = 'en_US';
+    currentFlag.title = 'English';
+    currentCode.textContent = 'EN';
+  }
+}
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('lang', lang);
+  updateLanguageSwitcher();
+  loadTexts();
+  
+  // 언어 변경 시 페이지 새로고침 대신 부드러운 전환
+  document.body.style.opacity = '0.8';
+  setTimeout(() => {
+    document.body.style.opacity = '1';
+  }, 300);
+}
+
+function loadTexts() {
+  fetch('/lang/texts.xml')
+    .then(res => res.text())
+    .then(str => (new window.DOMParser()).parseFromString(str, 'text/xml'))
+    .then(xml => {
+      // 모든 텍스트 매핑
+      const mappings = [
+        // Main sections
+        ['main-title', 'main_title'],
+        ['main-subtitle', 'main_subtitle'],
+        ['intro-title', 'intro_title'],
+        ['action-title', 'action_title'],
+        ['feature-title', 'feature_title'],
+        ['specialized-title', 'specialized_title'],
+        ['specialized-desc', 'specialized_desc'],
+        ['setup-guide-title', 'setup_guide_title'],
+        ['equipment-title', 'equipment_title'],
+        ['equipment-desc', 'equipment_desc'],
+        ['dispute-title', 'dispute_title'],
+        ['stopping-title', 'stopping_title'],
+        ['stopping-desc', 'stopping_desc'],
+        ['reviewing-title', 'reviewing_title'],
+        ['reviewing-desc', 'reviewing_desc'],
+        ['final-decision-title', 'final_decision_title'],
+        ['agreement-fails-title', 'agreement_fails_title'],
+        ['agreement-fails-desc', 'agreement_fails_desc'],
+        ['automated-decision-title', 'automated_decision_title'],
+        ['automated-decision-desc', 'automated_decision_desc'],
+        ['atp-title', 'atp_title'],
+        ['share-decision-title', 'share_decision_title'],
+        ['share-decision-desc', 'share_decision_desc'],
+        ['example-1-title', 'example_1_title'],
+        ['example-1-desc', 'example_1_desc'],
+        ['example-2-title', 'example_2_title'],
+        ['example-2-desc', 'example_2_desc'],
+        ['supported-devices-title', 'supported_devices_title'],
+        ['old-devices-title', 'old_devices_title'],
+        ['old-devices-desc', 'old_devices_desc'],
+        ['installation-tip-1-title', 'installation_tip_1_title'],
+        ['battery-title', 'battery_title'],
+        ['battery-desc', 'battery_desc'],
+        ['installation-tip-2-title', 'installation_tip_2_title'],
+        ['tripod-title', 'tripod_title'],
+        ['tripod-desc', 'tripod_desc'],
+        ['cooling-title', 'cooling_title'],
+        ['prevent-overheating-title', 'prevent_overheating_title'],
+        ['prevent-overheating-desc', 'prevent_overheating_desc'],
+        ['ipad-title', 'ipad_title'],
+        ['remote-control-title', 'remote_control_title'],
+        ['remote-control-desc', 'remote_control_desc'],
+        ['no-wifi-title', 'no_wifi_title'],
+        ['multipeer-title', 'multipeer_title'],
+        ['multipeer-desc', 'multipeer_desc'],
+        ['price-title', 'price_title'],
+        ['price-desc', 'price_desc'],
+        ['contact-text', 'contact_text'],
+        ['download-button-text', 'download_button_text']
+      ];
+      
+      mappings.forEach(([id, key]) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const node = xml.querySelector(`${key} > ${lang}`);
+          if (node) {
+            // innerHTML을 사용하여 줄바꿈 등을 유지
+            el.innerHTML = node.textContent.replace(/\n/g, '<br>');
+          }
+        }
+      });
+      
+      // 이메일 주소는 그대로 유지
+      const contactEl = document.getElementById('contact-email');
+      if (contactEl) {
+        contactEl.href = 'mailto:info@tennisblackbox.net';
+        contactEl.textContent = 'info@tennisblackbox.net';
+      }
+    })
+    .catch(err => console.error('Error loading translations:', err));
+}
+</script>
 
 <a class="skip-link screen-reader-text" href="#content" title="Skip to content">
 		Skip to content</a>
@@ -208,10 +332,8 @@ flexibility(document.documentElement);
 	
 <div class="wp-block-uagb-container uagb-block-j4wwca1s alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap">
 <div class="wp-block-uagb-info-box uagb-block-h1j33c1s uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h1 class="uagb-ifb-title">
-<br><strong>No More Controversies on Tennis Courts</strong>
-</h1></div>
-<p class="uagb-ifb-desc"><br><strong><br><strong>Turn Your iPhones into a Hawk-Eye System of ATP tournaments</strong></strong></p>
+<div class="uagb-ifb-title-wrap"><h1 class="uagb-ifb-title" id="main-title"></h1></div>
+<p class="uagb-ifb-desc" id="main-subtitle"></p>
 </div></div>
 </div></div>
 
@@ -223,7 +345,7 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-y9qwqdxr">
-<div class="wp-block-uagb-info-box uagb-block-wponxjxn uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title">🎥 Automatically records playing moments in ultra detail and clarity.<br>🎯 240fps + FHD (1920&#215;1080)<br><br>Call line disputes, foot faults, double bounces — everything can now be reviewed precisely.</h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-wponxjxn uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="intro-title"></h3></div></div></div>
 </div>
 </div></div>
 
@@ -231,7 +353,7 @@ flexibility(document.documentElement);
 
 <div class="wp-block-uagb-container uagb-block-cb4a2558 alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap">
 <div class="wp-block-uagb-container uagb-block-8fae1944">
-<div class="wp-block-uagb-info-box uagb-block-2eb4e24f uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong> Tennis Blackbox in Action</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-2eb4e24f uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="action-title"></h3></div></div></div>
 </div>
 
 
@@ -249,17 +371,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-af7ec0d5">
-<div class="wp-block-uagb-info-box uagb-block-17ff568d uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title">
-<strong>Tennis Blackbox: </strong><strong>Enhancing Your Game with Advanced Recording Features</strong>
-</h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-17ff568d uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="feature-title"></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-9d7b4c20 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong><strong>Specialized Recording Features</strong></strong></h4></div>
-<p class="uagb-ifb-desc">The Tennis Blackbox app leverages your smartphone&#8217;s capabilities to record matches at 240 fps in Full HD resolution, a feature not available in standard camera apps. This specialized functionality allows recreational players to capture their games with the same level of clarity and detail as professional systems like Hawk-Eye, providing a superior alternative for match analysis and line-calling.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="specialized-title"></h4></div>
+<p class="uagb-ifb-desc" id="specialized-desc"></p>
 </div>
 </div>
 </div>
@@ -273,15 +393,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-588d7d78">
-<div class="wp-block-uagb-info-box uagb-block-992173a4 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>Using Tennis Blackbox: A Guide to Setting Up Your Smartphone for Optimal Recording</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-992173a4 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="setup-guide-title"></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-1aa24d01 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong><strong>Equipment Setup</strong></strong></h4></div>
-<p class="uagb-ifb-desc">To begin using Tennis Blackbox, you will need at least two smartphones to cover both sides of the tennis court, ensuring comprehensive coverage. For optimal results, using four smartphones—two at each net post—is recommended. Position each smartphone near a net post to maximize the viewing area and capture every crucial aspect of the game.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="equipment-title"></h4></div>
+<p class="uagb-ifb-desc" id="equipment-desc"></p>
 </div>
 </div>
 </div>
@@ -295,15 +415,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-78cc1461">
-<div class="wp-block-uagb-info-box uagb-block-42aa804d uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>Resolving Disputes with Tennis Blackbox: Reviewing Line Calls</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-42aa804d uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="dispute-title"></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-5d0c8d1e uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong><strong>Stopping the Recording</strong></strong></h4></div>
-<p class="uagb-ifb-desc">When a dispute over a line call arises during a match, stop the recording with Tennis Blackbox for the review.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="stopping-title"><strong><strong>Stopping the Recording</strong></strong></h4></div>
+<p class="uagb-ifb-desc" id="stopping-desc">When a dispute over a line call arises during a match, stop the recording with Tennis Blackbox for the review.</p>
 </div>
 </div>
 
@@ -312,8 +432,8 @@ flexibility(document.documentElement);
 <div class="wp-block-uagb-info-box uagb-block-cb0c5828 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong><strong><strong>Reviewing the Play</strong></strong></strong></h4></div>
-<p class="uagb-ifb-desc">After stopping the recording, allow a short time for the video to process. Once ready, carefully review the footage to locate the exact moment the ball contacts the court. This high-resolution, slow-motion replay will clearly show whether the ball was in or out, providing a definitive answer to resolve the dispute.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="reviewing-title"><strong><strong><strong>Reviewing the Play</strong></strong></strong></h4></div>
+<p class="uagb-ifb-desc" id="reviewing-desc">After stopping the recording, allow a short time for the video to process. Once ready, carefully review the footage to locate the exact moment the ball contacts the court. This high-resolution, slow-motion replay will clearly show whether the ball was in or out, providing a definitive answer to resolve the dispute.</p>
 </div>
 </div>
 </div>
@@ -327,15 +447,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-234f1101">
-<div class="wp-block-uagb-info-box uagb-block-4eaa9bfd uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>Final Decision Making with Tennis Blackbox</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-4eaa9bfd uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="final-decision-title"><strong>Final Decision Making with Tennis Blackbox</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-1c9008ec uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong><strong>When Agreement Fails</strong></strong></h4></div>
-<p class="uagb-ifb-desc">If, after reviewing the high-resolution, slow-motion replay, the players still cannot agree on a line call, Tennis Blackbox steps in to resolve the issue.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="agreement-fails-title"><strong><strong>When Agreement Fails</strong></strong></h4></div>
+<p class="uagb-ifb-desc" id="agreement-fails-desc">If, after reviewing the high-resolution, slow-motion replay, the players still cannot agree on a line call, Tennis Blackbox steps in to resolve the issue.</p>
 </div>
 </div>
 
@@ -344,8 +464,8 @@ flexibility(document.documentElement);
 <div class="wp-block-uagb-info-box uagb-block-a5ce950a uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong><strong><strong>Automated Decision and Visualization</strong></strong></strong></h4></div>
-<p class="uagb-ifb-desc">The app analyzes the footage using advanced algorithms and makes an impartial decision on the in/out call. It then visually displays this decision on the screen, clearly indicating whether the ball was in or out. This feature helps ensure fair play and minimizes disputes, providing a definitive resolution that both players can trust.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="automated-decision-title"><strong><strong><strong>Automated Decision and Visualization</strong></strong></strong></h4></div>
+<p class="uagb-ifb-desc" id="automated-decision-desc">The app analyzes the footage using advanced algorithms and makes an impartial decision on the in/out call. It then visually displays this decision on the screen, clearly indicating whether the ball was in or out. This feature helps ensure fair play and minimizes disputes, providing a definitive resolution that both players can trust.</p>
 </div>
 </div>
 </div>
@@ -359,15 +479,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-7e8b3eb8">
-<div class="wp-block-uagb-info-box uagb-block-1857c242 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title">ATP-level fairness and entertainment to leisure players</h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-1857c242 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="atp-title">ATP-level fairness and entertainment to leisure players</h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-13e1546c uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title">Share Fair decision with the audience</h4></div>
-<p class="uagb-ifb-desc">With Apple's AirPlay, the Tennis Blackbox iPad screen can be mirrored to a large display.<br>This allows the audience to view the fair and impartial results together.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="share-decision-title">Share Fair decision with the audience</h4></div>
+<p class="uagb-ifb-desc" id="share-decision-desc">With Apple's AirPlay, the Tennis Blackbox iPad screen can be mirrored to a large display.<br>This allows the audience to view the fair and impartial results together.</p>
 </div>
 </div>
 </div>
@@ -383,13 +503,13 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-9ef5ba3c">
-<div class="wp-block-uagb-info-box uagb-block-df3a0e93 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>Example 1</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-df3a0e93 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="example-1-title"><strong>Example 1</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-54b722d3 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
-<div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong>Challenge on end line line call.</strong></h4></div></div>
+<div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="example-1-desc"><strong>Challenge on end line line call.</strong></h4></div></div>
 </div>
 </div>
 </div></div>
@@ -404,14 +524,14 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-56e8f7e2">
-<div class="wp-block-uagb-info-box uagb-block-770dd68d uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title">
+<div class="wp-block-uagb-info-box uagb-block-770dd68d uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="example-2-title">
 <strong>Example </strong>2</h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-408423bf uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
-<div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong>Challenge on side line line call.</strong></h4></div></div>
+<div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="example-2-desc"><strong>Challenge on side line line call.</strong></h4></div></div>
 </div>
 </div>
 </div></div>
@@ -425,15 +545,15 @@ flexibility(document.documentElement);
 	
 	
 	<div class="wp-block-uagb-container uagb-block-bc7beb70">
-	<div class="wp-block-uagb-info-box uagb-block-3e3419b6 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>Supported Devices</strong></h3></div></div></div>
-	
-	
-	
-	<div class="wp-block-uagb-info-box uagb-block-6350b9fd uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
-	<div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
-	<div class="uagb-ifb-content">
-	<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong>Use Old iPhones and iPads</strong></h4></div>
-	<p class="uagb-ifb-desc">Any iPhone with version higher than or equal to iPhone 8 (iPhone 8, iPhone X, iPhone SE2, etc.) and all iPad series except iPad 1st to 4th generation are supported.<br>
+	<div class="wp-block-uagb-info-box uagb-block-3e3419b6 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="supported-devices-title"><strong>Supported Devices</strong></h3></div></div></div>
+
+
+
+<div class="wp-block-uagb-info-box uagb-block-6350b9fd uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
+<div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
+<div class="uagb-ifb-content">
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="old-devices-title"><strong>Use Old iPhones and iPads</strong></h4></div>
+<p class="uagb-ifb-desc" id="old-devices-desc">Any iPhone with version higher than or equal to iPhone 8 (iPhone 8, iPhone X, iPhone SE2, etc.) and all iPad series except iPad 1st to 4th generation are supported.<br>
 		<strong>Even old iPhones and iPads can be used for recording and monitoring!</strong></p>
 	</div>
 	</div>
@@ -450,15 +570,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-bc7beb70">
-<div class="wp-block-uagb-info-box uagb-block-3e3419b6 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>⚠️ Installation Tip</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-3e3419b6 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="installation-tip-1-title"><strong>⚠️ Installation Tip</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-6350b9fd uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong>Prepare an External Battery</strong></h4></div>
-<p class="uagb-ifb-desc">High-speed recording drains iPhone battery quickly.<br>Connect an external battery to your iPhone during recording to ensure stable operation.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="battery-title"><strong>Prepare an External Battery</strong></h4></div>
+<p class="uagb-ifb-desc" id="battery-desc">High-speed recording drains iPhone battery quickly.<br>Connect an external battery to your iPhone during recording to ensure stable operation.</p>
 </div>
 </div>
 </div>
@@ -472,15 +592,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-97f48d7c">
-<div class="wp-block-uagb-info-box uagb-block-fdc28033 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>⚠️ Installation Tip</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-fdc28033 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="installation-tip-2-title"><strong>⚠️ Installation Tip</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-d80b2a41 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title">Set Up a Tripod</h4></div>
-<p class="uagb-ifb-desc">Elevating your iPhone ensures a more accurate perspective for line calls.<br>Use a tall tripod for best results.<br>To avoid long charging cables, place the external battery on the umpire's chair for easier access.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="tripod-title">Set Up a Tripod</h4></div>
+<p class="uagb-ifb-desc" id="tripod-desc">Elevating your iPhone ensures a more accurate perspective for line calls.<br>Use a tall tripod for best results.<br>To avoid long charging cables, place the external battery on the umpire's chair for easier access.</p>
 </div>
 </div>
 </div>
@@ -494,15 +614,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-40b604bb">
-<div class="wp-block-uagb-info-box uagb-block-61bce007 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>❄️ Use Fan and Cooling Plate</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-61bce007 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="cooling-title"><strong>❄️ Use Fan and Cooling Plate</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-43fd1cef uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong>Prevent Overheating During High-Speed Recording</strong></h4></div>
-<p class="uagb-ifb-desc"><br>High-speed recording can quickly raise the iPhone's temperature.<br>Excessive heat — especially on outdoor courts during hot summer days — may cause the device to shut down.<br>To ensure optimal performance, attach a cooling plate and fan to the iPhone during recording.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="prevent-overheating-title"><strong>Prevent Overheating During High-Speed Recording</strong></h4></div>
+<p class="uagb-ifb-desc" id="prevent-overheating-desc"><br>High-speed recording can quickly raise the iPhone's temperature.<br>Excessive heat — especially on outdoor courts during hot summer days — may cause the device to shut down.<br>To ensure optimal performance, attach a cooling plate and fan to the iPhone during recording.</p>
 </div>
 </div>
 </div>
@@ -516,15 +636,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-075e4d1e">
-<div class="wp-block-uagb-info-box uagb-block-2d1d61cb uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>📱 Use with iPad</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-2d1d61cb uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="ipad-title"><strong>📱 Use with iPad</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-3eabff33 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title"><strong>Remote Control and Monitoring Made Easy</strong></h4></div>
-<p class="uagb-ifb-desc">To get the best viewing angle, the iPhone is often mounted on a tall tripod — making direct control difficult.<br>The Tennis Blackbox iPad app allows you to remotely control and monitor the iPhone app with ease.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="remote-control-title"><strong>Remote Control and Monitoring Made Easy</strong></h4></div>
+<p class="uagb-ifb-desc" id="remote-control-desc">To get the best viewing angle, the iPhone is often mounted on a tall tripod — making direct control difficult.<br>The Tennis Blackbox iPad app allows you to remotely control and monitor the iPhone app with ease.</p>
 </div>
 </div>
 </div>
@@ -538,15 +658,15 @@ flexibility(document.documentElement);
 
 
 <div class="wp-block-uagb-container uagb-block-6cda75c7">
-<div class="wp-block-uagb-info-box uagb-block-8086bb82 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title"><strong>No Wi-Fi? No Problem.</strong></h3></div></div></div>
+<div class="wp-block-uagb-info-box uagb-block-8086bb82 uagb-infobox__content-wrap  uagb-infobox-icon-above-title uagb-infobox-image-valign-top"><div class="uagb-ifb-content"><div class="uagb-ifb-title-wrap"><h3 class="uagb-ifb-title" id="no-wifi-title"><strong>No Wi-Fi? No Problem.</strong></h3></div></div></div>
 
 
 
 <div class="wp-block-uagb-info-box uagb-block-d2bdb6aa uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title">Multipeer Connectivity</h4></div>
-<p class="uagb-ifb-desc">The Tennis Blackbox iPhone and iPad apps connect directly without requiring Wi-Fi or a router,<br>thanks to Apple's Multipeer Connectivity technology.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="multipeer-title">Multipeer Connectivity</h4></div>
+<p class="uagb-ifb-desc" id="multipeer-desc">The Tennis Blackbox iPhone and iPad apps connect directly without requiring Wi-Fi or a router,<br>thanks to Apple's Multipeer Connectivity technology.</p>
 </div>
 </div>
 </div>
@@ -563,8 +683,8 @@ flexibility(document.documentElement);
 <div class="wp-block-uagb-info-box uagb-block-50f16ce8 uagb-infobox__content-wrap  uagb-infobox-icon-left uagb-infobox-left uagb-infobox-image-valign-top">
 <div class="uagb-ifb-icon-wrap"><div class="uagb-iconbox-icon-wrap uagb-infobox-shape-circle"><svg xmlns="https://www.w3.org/2000/svg" viewbox="0 0 448 512"><path d="M438.6 105.4C451.1 117.9 451.1 138.1 438.6 150.6L182.6 406.6C170.1 419.1 149.9 419.1 137.4 406.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4C21.87 220.9 42.13 220.9 54.63 233.4L159.1 338.7L393.4 105.4C405.9 92.88 426.1 92.88 438.6 105.4H438.6z"></path></svg></div></div>
 <div class="uagb-ifb-content">
-<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title">Price</h4></div>
-<p class="uagb-ifb-desc">You can use the service for free for up to 20 minutes per day.<br>Beyond that, a fee of $0.99 per iPhone per day applies.<br>However, if you use the iPad app, the cost is $1.99 per day regardless of how many iPhones are connected.<br>That's why we strongly recommend using the iPad app for the best value.</p>
+<div class="uagb-ifb-title-wrap"><h4 class="uagb-ifb-title" id="price-title">Price</h4></div>
+<p class="uagb-ifb-desc" id="price-desc">You can use the service for free for up to 20 minutes per day.<br>Beyond that, a fee of $0.99 per iPhone per day applies.<br>However, if you use the iPad app, the cost is $1.99 per day regardless of how many iPhones are connected.<br>That's why we strongly recommend using the iPad app for the best value.</p>
 </div>
 </div>
 </div>
@@ -573,7 +693,7 @@ flexibility(document.documentElement);
 
 
 <h3 class="wp-block-heading has-text-align-center">
-<strong>For inquiries, please contact us at</strong> <a href="/cdn-cgi/l/email-protection#741d1a121b3400111a1a1d07161815171f161b0c5a1a1100"><span class="__cf_email__" data-cfemail="375e59515877435259595e44555b56545c55584f19595243">[email&#160;protected]</span></a>
+<strong id="contact-text">For inquiries, please contact us at</strong> <a href="mailto:info@tennisblackbox.net" id="contact-email">info@tennisblackbox.net</a>
 </h3>
 
 
@@ -581,7 +701,7 @@ flexibility(document.documentElement);
 <div class="wp-block-uagb-container uagb-block-8aec458c alignfull uagb-is-root-container"><div class="uagb-container-inner-blocks-wrap">
 <div class="wp-block-uagb-container uagb-block-100ccaa7">
 <div class="wp-block-uagb-buttons uagb-buttons__outer-wrap uagb-btn__default-btn uagb-btn-tablet__default-btn uagb-btn-mobile__default-btn uagb-block-a75b9bec"><div class="uagb-buttons__wrap uagb-buttons-layout-wrap ">
-<div class="wp-block-uagb-buttons-child uagb-buttons__outer-wrap uagb-block-9d973d6b wp-block-button"><div class="uagb-button__wrapper"><a class="uagb-buttons-repeater wp-block-button__link" aria-label="" href="itms-apps://apps.apple.com/app/id6474873410" rel="follow noopener" target="_self" role="button"><div class="uagb-button__link">Download on the<br>App Store for iPhone/iPad</div></a></div></div>
+<div class="wp-block-uagb-buttons-child uagb-buttons__outer-wrap uagb-block-9d973d6b wp-block-button"><div class="uagb-button__wrapper"><a class="uagb-buttons-repeater wp-block-button__link" aria-label="" href="itms-apps://apps.apple.com/app/id6474873410" rel="follow noopener" target="_self" role="button"><div class="uagb-button__link" id="download-button-text">Download on the<br>App Store for iPhone/iPad</div></a></div></div>
 </div></div>
 </div>
 </div></div>
@@ -625,13 +745,13 @@ flexibility(document.documentElement);
             <div id="trp-floater-ls-current-language" class="trp-with-flags">
 
                 <a href="#" class="trp-floater-ls-disabled-language trp-ls-disabled-language" onclick="event.preventDefault()">
-					<img class="trp-flag-image" src="/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png" width="18" height="12" alt="en_US" title="English">EN				</a>
+					<img class="trp-flag-image" id="current-lang-flag" src="/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png" width="18" height="12" alt="en_US" title="English"><span id="current-lang-code">EN</span>				</a>
 
             </div>
             <div id="trp-floater-ls-language-list" class="trp-with-flags">
 
                 <div class="trp-language-wrap trp-language-wrap-top">
-<a href="#" class="trp-floater-ls-disabled-language trp-ls-disabled-language" onclick="event.preventDefault()"><img class="trp-flag-image" src="/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png" width="18" height="12" alt="en_US" title="English">EN</a>                    <a href="/ko/" title="한국어">
+<a href="#" onclick="setLang('en'); event.preventDefault()"><img class="trp-flag-image" src="/wp-content/plugins/translatepress-multilingual/assets/images/flags/en_US.png" width="18" height="12" alt="en_US" title="English">EN</a>                    <a href="#" onclick="setLang('ko'); event.preventDefault()" title="한국어">
           						  <img class="trp-flag-image" src="/wp-content/plugins/translatepress-multilingual/assets/images/flags/ko_KR.png" width="18" height="12" alt="ko_KR" title="한국어">KO					          </a>
                 </div>            </div>
         </div>

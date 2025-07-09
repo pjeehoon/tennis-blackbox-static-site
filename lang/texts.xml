@@ -1,0 +1,262 @@
+<texts>
+  <!-- Main Title and Subtitle -->
+  <main_title>
+    <en>No More Controversies on Tennis Courts</en>
+    <ko>테니스 코트에서 더 이상 논란은 없습니다</ko>
+  </main_title>
+  <main_subtitle>
+    <en>Turn Your iPhones into a Hawk-Eye System of ATP tournaments</en>
+    <ko>여러분의 아이폰을 ATP 대회 호크아이 시스템으로!</ko>
+  </main_subtitle>
+  
+  <!-- Intro Section -->
+  <intro_title>
+    <en>🎥 Automatically records playing moments in ultra detail and clarity.
+🎯 240fps + FHD (1920×1080)
+
+Call line disputes, foot faults, double bounces — everything can now be reviewed precisely.</en>
+    <ko>🎥 경기 순간을 초고화질로 자동 녹화합니다.
+🎯 240fps + FHD (1920×1080)
+
+라인 판정, 풋 폴트, 더블 바운스 — 모든 것을 정확하게 검토할 수 있습니다.</ko>
+  </intro_title>
+  
+  <!-- Action Section -->
+  <action_title>
+    <en>Tennis Blackbox in Action</en>
+    <ko>Tennis Blackbox 실제 사용 모습</ko>
+  </action_title>
+  
+  <!-- Feature Section -->
+  <feature_title>
+    <en>Tennis Blackbox: Enhancing Your Game with Advanced Recording Features</en>
+    <ko>Tennis Blackbox: 고급 녹화 기능으로 경기력 향상</ko>
+  </feature_title>
+  <specialized_title>
+    <en>Specialized Recording Features</en>
+    <ko>특화된 녹화 기능</ko>
+  </specialized_title>
+  <specialized_desc>
+    <en>The Tennis Blackbox app leverages your smartphone's capabilities to record matches at 240 fps in Full HD resolution, a feature not available in standard camera apps. This specialized functionality allows recreational players to capture their games with the same level of clarity and detail as professional systems like Hawk-Eye, providing a superior alternative for match analysis and line-calling.</en>
+    <ko>Tennis Blackbox 앱은 스마트폰의 기능을 활용하여 일반 카메라 앱에서는 불가능한 240fps Full HD 해상도로 경기를 녹화합니다. 이 특화된 기능을 통해 레크리에이션 플레이어도 Hawk-Eye와 같은 전문 시스템과 동일한 수준의 선명도와 디테일로 경기를 촬영할 수 있어, 경기 분석과 라인 판정에 우수한 대안을 제공합니다.</ko>
+  </specialized_desc>
+  
+  <!-- Setup Guide Section -->
+  <setup_guide_title>
+    <en>Using Tennis Blackbox: A Guide to Setting Up Your Smartphone for Optimal Recording</en>
+    <ko>Tennis Blackbox 사용법: 최적의 녹화를 위한 스마트폰 설정 가이드</ko>
+  </setup_guide_title>
+  <equipment_title>
+    <en>Equipment Setup</en>
+    <ko>장비 설치</ko>
+  </equipment_title>
+  <equipment_desc>
+    <en>To begin using Tennis Blackbox, you will need at least two smartphones to cover both sides of the tennis court, ensuring comprehensive coverage. For optimal results, using four smartphones—two at each net post—is recommended. Position each smartphone near a net post to maximize the viewing area and capture every crucial aspect of the game.</en>
+    <ko>Tennis Blackbox를 사용하려면 테니스 코트 양쪽을 커버하기 위해 최소 2대의 스마트폰이 필요합니다. 최적의 결과를 위해서는 각 네트 포스트에 2대씩, 총 4대의 스마트폰을 사용하는 것이 좋습니다. 각 스마트폰을 네트 포스트 근처에 배치하여 시야를 최대화하고 경기의 모든 중요한 순간을 포착하세요.</ko>
+  </equipment_desc>
+  
+  <!-- Dispute Resolution Section -->
+  <dispute_title>
+    <en>Resolving Disputes with Tennis Blackbox: Reviewing Line Calls</en>
+    <ko>Tennis Blackbox로 분쟁 해결: 라인 판정 검토</ko>
+  </dispute_title>
+  <stopping_title>
+    <en>Stopping the Recording</en>
+    <ko>녹화 중지</ko>
+  </stopping_title>
+  <stopping_desc>
+    <en>When a dispute over a line call arises during a match, stop the recording with Tennis Blackbox for the review.</en>
+    <ko>경기 중 라인 판정에 대한 논란이 발생하면, 검토를 위해 Tennis Blackbox 녹화를 중지하세요.</ko>
+  </stopping_desc>
+  <reviewing_title>
+    <en>Reviewing the Play</en>
+    <ko>플레이 검토</ko>
+  </reviewing_title>
+  <reviewing_desc>
+    <en>After stopping the recording, allow a short time for the video to process. Once ready, carefully review the footage to locate the exact moment the ball contacts the court. This high-resolution, slow-motion replay will clearly show whether the ball was in or out, providing a definitive answer to resolve the dispute.</en>
+    <ko>녹화를 중지한 후, 비디오 처리를 위해 잠시 기다리세요. 준비가 되면 공이 코트에 닿는 정확한 순간을 찾기 위해 영상을 주의 깊게 검토하세요. 이 고해상도 슬로우 모션 리플레이는 공이 인인지 아웃인지 명확하게 보여주어 논란을 해결할 확실한 답을 제공합니다.</ko>
+  </reviewing_desc>
+  
+  <!-- Final Decision Section -->
+  <final_decision_title>
+    <en>Final Decision Making with Tennis Blackbox</en>
+    <ko>Tennis Blackbox로 최종 결정하기</ko>
+  </final_decision_title>
+  <agreement_fails_title>
+    <en>When Agreement Fails</en>
+    <ko>합의가 실패했을 때</ko>
+  </agreement_fails_title>
+  <agreement_fails_desc>
+    <en>If, after reviewing the high-resolution, slow-motion replay, the players still cannot agree on a line call, Tennis Blackbox steps in to resolve the issue.</en>
+    <ko>고해상도 슬로우 모션 리플레이를 검토한 후에도 플레이어들이 라인 판정에 합의하지 못하면, Tennis Blackbox가 문제를 해결합니다.</ko>
+  </agreement_fails_desc>
+  <automated_decision_title>
+    <en>Automated Decision and Visualization</en>
+    <ko>자동 판정 및 시각화</ko>
+  </automated_decision_title>
+  <automated_decision_desc>
+    <en>The app analyzes the footage using advanced algorithms and makes an impartial decision on the in/out call. It then visually displays this decision on the screen, clearly indicating whether the ball was in or out. This feature helps ensure fair play and minimizes disputes, providing a definitive resolution that both players can trust.</en>
+    <ko>앱은 고급 알고리즘을 사용하여 영상을 분석하고 인/아웃 판정에 대한 공정한 결정을 내립니다. 그런 다음 이 결정을 화면에 시각적으로 표시하여 공이 인인지 아웃인지 명확하게 나타냅니다. 이 기능은 공정한 플레이를 보장하고 논란을 최소화하여 양 플레이어가 신뢰할 수 있는 확실한 해결책을 제공합니다.</ko>
+  </automated_decision_desc>
+  
+  <!-- ATP Level Section -->
+  <atp_title>
+    <en>ATP-level fairness and entertainment to leisure players</en>
+    <ko>레저 플레이어에게 ATP 수준의 공정성과 재미를</ko>
+  </atp_title>
+  <share_decision_title>
+    <en>Share Fair decision with the audience</en>
+    <ko>관중과 공정한 판정 공유</ko>
+  </share_decision_title>
+  <share_decision_desc>
+    <en>With Apple's AirPlay, the Tennis Blackbox iPad screen can be mirrored to a large display.
+This allows the audience to view the fair and impartial results together.</en>
+    <ko>Apple의 AirPlay를 사용하여 Tennis Blackbox iPad 화면을 대형 디스플레이에 미러링할 수 있습니다.
+이를 통해 관중들이 공정하고 공평한 결과를 함께 볼 수 있습니다.</ko>
+  </share_decision_desc>
+  
+  <!-- Examples -->
+  <example_1_title>
+    <en>Example 1</en>
+    <ko>예시 1</ko>
+  </example_1_title>
+  <example_1_desc>
+    <en>Challenge on end line line call.</en>
+    <ko>엔드라인 판정 챌린지</ko>
+  </example_1_desc>
+  <example_2_title>
+    <en>Example 2</en>
+    <ko>예시 2</ko>
+  </example_2_title>
+  <example_2_desc>
+    <en>Challenge on side line line call.</en>
+    <ko>사이드라인 판정 챌린지</ko>
+  </example_2_desc>
+  
+  <!-- Supported Devices -->
+  <supported_devices_title>
+    <en>Supported Devices</en>
+    <ko>지원 기기</ko>
+  </supported_devices_title>
+  <old_devices_title>
+    <en>Use Old iPhones and iPads</en>
+    <ko>구형 iPhone 및 iPad 활용</ko>
+  </old_devices_title>
+  <old_devices_desc>
+    <en>Any iPhone with version higher than or equal to iPhone 8 (iPhone 8, iPhone X, iPhone SE2, etc.) and all iPad series except iPad 1st to 4th generation are supported.
+Even old iPhones and iPads can be used for recording and monitoring!</en>
+    <ko>iPhone 8 이상(iPhone 8, iPhone X, iPhone SE2 등)과 iPad 1~4세대를 제외한 모든 iPad 시리즈가 지원됩니다.
+구형 iPhone 및 iPad도 녹화 및 모니터링에 활용할 수 있습니다!</ko>
+  </old_devices_desc>
+  
+  <!-- Installation Tips -->
+  <installation_tip_1_title>
+    <en>⚠️ Installation Tip</en>
+    <ko>⚠️ 설치 팁</ko>
+  </installation_tip_1_title>
+  <battery_title>
+    <en>Prepare an External Battery</en>
+    <ko>외부 배터리 준비</ko>
+  </battery_title>
+  <battery_desc>
+    <en>High-speed recording drains iPhone battery quickly.
+Connect an external battery to your iPhone during recording to ensure stable operation.</en>
+    <ko>고속 녹화는 iPhone 배터리를 빠르게 소모합니다.
+안정적인 작동을 위해 녹화 중 iPhone에 외부 배터리를 연결하세요.</ko>
+  </battery_desc>
+  
+  <installation_tip_2_title>
+    <en>⚠️ Installation Tip</en>
+    <ko>⚠️ 설치 팁</ko>
+  </installation_tip_2_title>
+  <tripod_title>
+    <en>Set Up a Tripod</en>
+    <ko>삼각대 설치</ko>
+  </tripod_title>
+  <tripod_desc>
+    <en>Elevating your iPhone ensures a more accurate perspective for line calls.
+Use a tall tripod for best results.
+To avoid long charging cables, place the external battery on the umpire's chair for easier access.</en>
+    <ko>iPhone을 높이 설치하면 라인 판정을 위한 더 정확한 시야를 확보할 수 있습니다.
+최상의 결과를 위해 높은 삼각대를 사용하세요.
+외부 배터리를 심판 의자에 놓으면 긴 충전 케이블을 사용하지 않아도 됩니다.</ko>
+  </tripod_desc>
+  
+  <!-- Cooling Section -->
+  <cooling_title>
+    <en>❄️ Use Fan and Cooling Plate</en>
+    <ko>❄️ 팬과 쿨링 플레이트 사용</ko>
+  </cooling_title>
+  <prevent_overheating_title>
+    <en>Prevent Overheating During High-Speed Recording</en>
+    <ko>고속 녹화 중 과열 방지</ko>
+  </prevent_overheating_title>
+  <prevent_overheating_desc>
+    <en>High-speed recording can quickly raise the iPhone's temperature.
+Excessive heat — especially on outdoor courts during hot summer days — may cause the device to shut down.
+To ensure optimal performance, attach a cooling plate and fan to the iPhone during recording.</en>
+    <ko>고속 녹화는 iPhone의 온도를 빠르게 상승시킬 수 있습니다.
+과도한 열 — 특히 더운 여름날 야외 코트에서 — 은 기기를 종료시킬 수 있습니다.
+최적의 성능을 보장하려면 녹화 중 iPhone에 쿨링 플레이트와 팬을 부착하세요.</ko>
+  </prevent_overheating_desc>
+  
+  <!-- iPad Section -->
+  <ipad_title>
+    <en>📱 Use with iPad</en>
+    <ko>📱 iPad와 함께 사용</ko>
+  </ipad_title>
+  <remote_control_title>
+    <en>Remote Control and Monitoring Made Easy</en>
+    <ko>원격 제어 및 모니터링 간편화</ko>
+  </remote_control_title>
+  <remote_control_desc>
+    <en>To get the best viewing angle, the iPhone is often mounted on a tall tripod — making direct control difficult.
+The Tennis Blackbox iPad app allows you to remotely control and monitor the iPhone app with ease.</en>
+    <ko>최상의 시야각을 얻기 위해 iPhone은 종종 높은 삼각대에 장착되어 직접 제어가 어렵습니다.
+Tennis Blackbox iPad 앱을 사용하면 iPhone 앱을 쉽게 원격으로 제어하고 모니터링할 수 있습니다.</ko>
+  </remote_control_desc>
+  
+  <!-- No WiFi Section -->
+  <no_wifi_title>
+    <en>No Wi-Fi? No Problem.</en>
+    <ko>Wi-Fi가 없어도 문제없습니다.</ko>
+  </no_wifi_title>
+  <multipeer_title>
+    <en>Multipeer Connectivity</en>
+    <ko>멀티피어 연결</ko>
+  </multipeer_title>
+  <multipeer_desc>
+    <en>The Tennis Blackbox iPhone and iPad apps connect directly without requiring Wi-Fi or a router, thanks to Apple's Multipeer Connectivity technology.</en>
+    <ko>Tennis Blackbox iPhone 및 iPad 앱은 Apple의 멀티피어 연결 기술 덕분에 Wi-Fi나 라우터 없이도 직접 연결됩니다.</ko>
+  </multipeer_desc>
+  
+  <!-- Price Section -->
+  <price_title>
+    <en>Price</en>
+    <ko>가격</ko>
+  </price_title>
+  <price_desc>
+    <en>You can use the service for free for up to 20 minutes per day.
+Beyond that, a fee of $0.99 per iPhone per day applies.
+However, if you use the iPad app, the cost is $1.99 per day regardless of how many iPhones are connected.
+That's why we strongly recommend using the iPad app for the best value.</en>
+    <ko>하루에 최대 20분까지 무료로 서비스를 사용할 수 있습니다.
+그 이상은 iPhone당 하루 $0.99의 요금이 부과됩니다.
+그러나 iPad 앱을 사용하면 연결된 iPhone 수에 관계없이 하루 $1.99입니다.
+그래서 최고의 가치를 위해 iPad 앱 사용을 강력히 권장합니다.</ko>
+  </price_desc>
+  
+  <!-- Contact Section -->
+  <contact_text>
+    <en>For inquiries, please contact us at</en>
+    <ko>문의사항은 다음으로 연락주세요</ko>
+  </contact_text>
+  
+  <!-- Download Button -->
+  <download_button_text>
+    <en>Download on the
+App Store for iPhone/iPad</en>
+    <ko>App Store에서
+iPhone/iPad용 다운로드</ko>
+  </download_button_text>
+</texts> 
